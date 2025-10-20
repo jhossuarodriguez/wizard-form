@@ -383,7 +383,7 @@
             </div>
         </form>
 
-        <form id="form3" class="form-step hidden">
+        <form id="form3" class="form-step hidden space-y-10">
             <h2 class="text-xl font-semibold mb-6">Titulo de sección</h2>
 
             <!--Pregunta 24-->
@@ -422,11 +422,340 @@
                 </div>
             </div>
 
+            <!--Pregunta 26-->
+            <div>
+                <label class="block text-lg font-medium mt-5">
+                    26. ¿A qué edad ingresó a la escuela?
+                </label>
+                <input
+                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="number" placeholder="Ingrese edad" disabled>
+            </div>
+
+            <!--Pregunta 27-->
+            <div>
+                <label class="block text-lg font-medium mt-5">
+                    27. Nombre del centro educativo
+                </label>
+                <input
+                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="text" placeholder="Ingrese nombre" disabled>
+            </div>
+
+            <!--Pregunta 28-->
+            <div>
+                <label class="block text-lg font-medium mt-5">
+                    28. Curso actual
+                </label>
+                <input
+                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="text" placeholder="Ingrese nombre" disabled>
+            </div>
+
+            <!--Pregunta 29-->
+            <div>
+                <h2 class="block text-lg font-medium mt-5">
+                    29. Tipo de centro educativo
+                </h2>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Público</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>Privado</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="otro">
+                        <span>Otro</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 30-->
+            <div>
+                <h2 class="block text-lg font-medium mt-5">
+                    30. Características del centro
+                </h2>
+
+                <select class="p-2 border rounded-md" name="caracteristicasCentro" id="caracteristicasCentro">
+                    <option value="1" selected>Seleccione una opción</option>
+                    <option value="escuela_regular">Escuela regular</option>
+                    <option value="escuela_especial">Escuela especial</option>
+                    <option value="aula_recursos">Aula de recursos</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+
+            <!--Pregunta 31-->
+            <div>
+                <h2 class="block text-lg font-medium mt-5">
+                    31. ¿Cómo se dio el proceso de adaptación al centro educativo o
+                    sala de tarea?
+                </h2>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="conDificultad">
+                        <span>Con dificultad</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="sinDificultad">
+                        <span>Sin dificultad</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 32-->
+            <div>
+                <h2 class="block text-lg font-medium mt-5">
+                    32. ¿Cómo calificaría la experiencia escolar del niño?
+                </h2>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="excelente">
+                        <span>Excelente</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="bueno">
+                        <span>Bueno</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="regular">
+                        <span>Regular</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="deficiente">
+                        <span>Deficiente</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 33-->
+            <div>
+                <h2 class="block text-lg font-medium mt-5">
+                    33. ¿Cómo percibe el apoyo que le dan los maestros y el centro
+                    educativo a su hijo?
+                </h2>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="excelente">
+                        <span>Excelente</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="bueno">
+                        <span>Bueno</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="regular">
+                        <span>Regular</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="deficiente">
+                        <span>Deficiente</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 34-->
+            <div>
+                <h2 class="block text-lg font-medium mt-5">
+                    34. ¿Cómo es considerado por los maestros el desempeño del
+                    niño en el aula?
+                </h2>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="excelente">
+                        <span>Excelente</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="bueno">
+                        <span>Bueno</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="regular">
+                        <span>Regular</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="deficiente">
+                        <span>Deficiente</span>
+                    </label>
+                </div>
+            </div>
         </form>
 
-        <form id="form4" class="form-step hidden">
+        <form id="form4" class="form-step hidden space-y-10">
             <h2 class="text-xl font-semibold mb-6">Titulo de sección</h2>
-            <p>Final confirmation...</p>
+
+            <!--Pregunta 35-->
+            <div>
+                <label class="block text-lg font-medium space-y-10">35. ¿Asiste el niño a sala de tarea?</label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 36-->
+            <div>
+                <label class="block text-lg font-medium">
+                    36. ¿Se relaciona e integra a las actividades con otros niños?
+                </label>
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Siempre">
+                        <span>Siempre</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="La mayor parte del tiempo">
+                        <span>La mayor parte del tiempo</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="A veces">
+                        <span>A veces</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Permanece aislado">
+                        <span>Permanece aislado</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 37-->
+            <div>
+                <label class="block text-lg font-medium space-y-10">
+                    37. ¿Participa el niño de actividades en su comunidad?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 38-->
+            <div>
+                <label class="block text-lg font-medium space-y-10">
+                    38. ¿De qué forma sus vecinos o amigos interactúan con el niño?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Lo Integran">
+                        <span>Lo integran</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Lo rechazan">
+                        <span>Lo rechazan</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Lo rechazan">
+                        <span>Lo rechazan</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 39-->
+            <div>
+                <label class="block text-lg font-medium space-y-10">
+                    39. ¿Se ha sentido el niño o la familia excluida de actividades en
+                    la comunidad?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 40-->
+            <div>
+                <label class="block text-lg font-medium space-y-10">
+                    40. ¿Cuenta la familia con red de apoyo?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+
+            <!--Pregunta 41-->
+            <div>
+                <label class="block text-lg font-medium space-y-10">
+                    41. ¿Con qué tipo de red de apoyo cuenta la familia?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Primaria">
+                        <span>Primaria</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Secundaria">
+                        <span>Secundaria</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="Formal">
+                        <span>Formal</span>
+                    </label>
+                </div>
+            </div>
+
         </form>
 
         <!-- Buttons -->
@@ -442,16 +771,147 @@
         </div>
     </div>
     <script>
-        let currentStep = 3;
+        let currentStep = 1;
         const totalSteps = 4;
 
+        // AGREGAR ASTERISCOS ROJOS A CAMPOS OBLIGATORIOS
+        const addRequiredAsterisks = () => {
+            document.querySelectorAll('.form-step').forEach(form => {
+                // Buscar labels de preguntas que no estén deshabilitadas
+                const questionBlocks = form.querySelectorAll('div');
+
+                questionBlocks.forEach(block => {
+                    const label = block.querySelector('label.block');
+                    if (!label) return;
+
+                    // Verificar si el bloque tiene campos no deshabilitados
+                    const hasRequiredFields =
+                        block.querySelector('textarea:not([disabled])') ||
+                        block.querySelector('input[type="text"]:not([disabled])') ||
+                        block.querySelector('input[type="number"]:not([disabled])') ||
+                        block.querySelector('input[type="radio"]:not([disabled])') ||
+                        block.querySelector('input[type="checkbox"]:not([disabled])') ||
+                        block.querySelector('select:not([disabled])');
+
+                    if (hasRequiredFields && !label.querySelector('.required-asterisk')) {
+                        const asterisk = document.createElement('span');
+                        asterisk.className = 'required-asterisk text-red-500 ml-1';
+                        asterisk.innerHTML = '*';
+                        label.appendChild(asterisk);
+                    }
+                });
+            });
+        };
+
+        // LIMPIAR MENSAJES DE ERROR PREVIOS
+        const clearValidationErrors = () => {
+            const currentForm = document.getElementById(`form${currentStep}`);
+
+            // Remover bordes rojos
+            currentForm.querySelectorAll('.border-red-500').forEach(el => {
+                el.classList.remove('border-red-500');
+                el.classList.add('border');
+            });
+
+            // Remover mensajes de error
+            currentForm.querySelectorAll('.error-message').forEach(el => el.remove());
+        };
+
+        // MOSTRAR ERROR EN UN BLOQUE ESPECÍFICO
+        const showError = (questionBlock, message) => {
+            // Agregar borde rojo a los campos
+            const fields = questionBlock.querySelectorAll('input, textarea, select');
+            fields.forEach(field => {
+                field.classList.add('border-red-500');
+                field.classList.remove('border');
+            });
+
+            // Crear mensaje de error
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message text-red-500 text-sm mt-2 font-medium';
+            errorDiv.innerHTML = `⚠️ ${message}`;
+
+            // Insertar el mensaje al final del bloque
+            questionBlock.appendChild(errorDiv);
+        };
+
+        // VALIDACIÓN MEJORADA CON ERRORES VISUALES
+        const validateCurrentForm = () => {
+            const currentForm = document.getElementById(`form${currentStep}`);
+            let isValid = true;
+
+            // Limpiar errores previos
+            clearValidationErrors();
+
+            // Obtener todos los bloques de preguntas (divs que contienen campos)
+            const questionBlocks = Array.from(currentForm.children).filter(child =>
+                child.tagName === 'DIV' &&
+                (child.querySelector('input, textarea, select'))
+            );
+
+            questionBlocks.forEach(block => {
+                let blockIsValid = true;
+                let errorMessage = '';
+
+                // 1. VALIDAR TEXTAREAS
+                const textarea = block.querySelector('textarea:not([disabled])');
+                if (textarea && !textarea.value.trim()) {
+                    blockIsValid = false;
+                    errorMessage = 'Este campo de texto es obligatorio';
+                }
+
+                // 2. VALIDAR INPUTS DE TEXTO Y NÚMERO
+                const textInput = block.querySelector('input[type="text"]:not([disabled]), input[type="number"]:not([disabled])');
+                if (textInput && !textInput.value.trim()) {
+                    blockIsValid = false;
+                    errorMessage = 'Este campo es obligatorio';
+                }
+
+                // 3. VALIDAR RADIO BUTTONS
+                const radios = block.querySelectorAll('input[type="radio"]:not([disabled])');
+                if (radios.length > 0) {
+                    const isChecked = Array.from(radios).some(radio => radio.checked);
+                    if (!isChecked) {
+                        blockIsValid = false;
+                        errorMessage = 'Debe seleccionar una opción';
+                    }
+                }
+
+                // 4. VALIDAR CHECKBOXES
+                const checkboxes = block.querySelectorAll('input[type="checkbox"]:not([disabled])');
+                if (checkboxes.length > 0) {
+                    const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+                    if (!isChecked) {
+                        blockIsValid = false;
+                        errorMessage = 'Debe seleccionar al menos una opción';
+                    }
+                }
+
+                // 5. VALIDAR SELECTS
+                const select = block.querySelector('select:not([disabled])');
+                if (select && (!select.value || select.value === '' || select.value === '1')) {
+                    blockIsValid = false;
+                    errorMessage = 'Debe seleccionar una opción del menú';
+                }
+
+                // Si el bloque no es válido, mostrar error
+                if (!blockIsValid) {
+                    showError(block, errorMessage);
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        };
+
+        // ACTUALIZAR LA VISUALIZACIÓN DE LOS PASOS
         const updateSteps = () => {
-            // Mostrar/ocultar formularios
+            // Mostrar/ocultar formularios según el paso actual
             document.querySelectorAll('.form-step').forEach((form, index) => {
                 form.classList.toggle('hidden', index + 1 !== currentStep);
             });
 
-            // Actualizar el color del indicador
+            // Actualizar el color del indicador de pasos
             document.querySelectorAll('.step').forEach((el, index) => {
                 if (index + 1 === currentStep) {
                     el.classList.add('bg-[#536de5]', 'text-white');
@@ -459,19 +919,57 @@
                     el.classList.remove('bg-[#536de5]', 'text-white');
                 }
             });
+
+            // Ocultar el botón "Anterior" en el primer paso
+            document.getElementById('prevBtn').style.display = currentStep === 1 ? 'none' : 'block';
+
+            // Cambiar el texto del botón en el último paso
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? 'Enviar' : 'Continuar';
+
+            // Limpiar errores al cambiar de paso
+            clearValidationErrors();
         };
 
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            if (currentStep < totalSteps) currentStep++;
+        // BOTÓN SIGUIENTE CON VALIDACIÓN VISUAL
+        document.getElementById('nextBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (validateCurrentForm()) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateSteps();
+                } else {
+                    alert('✅ Formulario completado exitosamente');
+                    // Aquí puedes enviar el formulario
+                }
+            }
+        });
+
+        // BOTÓN ANTERIOR
+        document.getElementById('prevBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentStep > 1) {
+                currentStep--;
+                updateSteps();
+            }
+        });
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', () => {
+            addRequiredAsterisks();
             updateSteps();
         });
 
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            if (currentStep > 1) currentStep--;
+        // Fallback si DOMContentLoaded ya pasó
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                addRequiredAsterisks();
+                updateSteps();
+            });
+        } else {
+            addRequiredAsterisks();
             updateSteps();
-        });
-
-        updateSteps();
+        }
     </script>
 </body>
 
