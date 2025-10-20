@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Wizard</title>
+    <link rel="stylesheet" href="input.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex items-center justify-center px-4">
+
+    <div class="w-full max-w-[1467px] h-auto bg-white shadow-md rounded-2xl p-8">
+        <!-- Section indicators -->
+        <div class="flex items-center justify-center mb-10">
+            <div class="flex items-center">
+                <div id="step1"
+                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] text-gray-500">
+                    1</div>
+                <div class="w-20 h-[2px] bg-[#536de5]"></div>
+            </div>
+            <div class="flex items-center">
+                <div id="step2"
+                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] bg-[#536de5] text-gray-500">
+                    2</div>
+                <div class="w-20 h-[2px] bg-[#536de5]"></div>
+            </div>
+            <div class="flex items-center">
+                <div id="step3"
+                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] text-gray-500">
+                    3</div>
+                <div class="w-20 h-[2px] bg-[#536de5]"></div>
+            </div>
+            <div class="flex items-center">
+                <div id="step4"
+                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] text-gray-500">
+                    4</div>
+            </div>
+        </div>
+
+        <!-- Form 1 -->
+        <form id="form1" class="form-step hidden space-y-10">
+            <h2 class="text-xl font-semibold mb-6 ">Titulo de sección</h2>
+
+            <!-- Pregunta 1-->
+            <div>
+                <label class="block text-lg font-medium">1. ¿Cuál es el motivo de consulta?</label>
+                <textarea name="" id=""
+                    class="w-full mt-5 border rounded-md p-2 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    rows="4" disabled></textarea>
+            </div>
+
+            <!-- Pregunta 2-->
+            <div>
+                <label class="block text-lg font-medium" for="">2. ¿Ha sido referido para evaluación del desarrollo y
+                    diagnostico?
+                </label>
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 3-->
+            <div>
+                <label class="block text-lg font-medium">3. ¿Quién es la persona o entidad que realiza el
+                    referimiento o recomendación?</label>
+                <input
+                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="text" placeholder="Ingrese nombre" disabled>
+            </div>
+
+            <!-- Pregunta 4-->
+            <div>
+                <label class="block text-lg font-medium">4. ¿Tiene el niño un diagnostico previo?</label>
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 5-->
+            <div>
+                <label class="block text-lg font-medium">5. ¿Cuál es el diagnóstico previo?</label>
+                <input
+                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="text" value="" placeholder="Ingrese nombre" disabled>
+            </div>
+
+            <!-- Pregunta 6-->
+            <div>
+                <label class="block text-lg font-medium">6. ¿Cuál fue el centro profesional que realizó el
+                    diagnóstico?</label>
+                <input
+                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="text" value="" placeholder="Ingrese nombre" disabled>
+            </div>
+
+            <!-- Pregunta 7-->
+            <div>
+                <label class="block text-lg font-medium">7. ¿El niño recibe o ha recibido intervención
+                    terapéutica?</label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 8-->
+            <div class="max-w-4xl text-xs md:text-base">
+                <h2 class="block text-lg font-medium"> 8. ¿Cuáles terapias recibe o ha recibido?
+                </h2>
+                <div class="flex flex-col space-y-5">
+                    <div class="w-full flex flex-row justify-between items-center gap-x-5 mt-5">
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="terapia_habla_lenguaje" id="hablaLenguaje">
+                            <label>Terapia de habla y del lenguaje</label>
+                        </div>
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="terapia_intervencion_conductual" id="intervencionConductual">
+                            <label>Intervención conductual</label>
+                        </div>
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="terapia_ocupacional" id="ocupacional">
+                            <label>Terapia ocupacional</label>
+                        </div>
+                    </div>
+                    <div class="w-full flex flex-row justify-between items-center gap-x-5">
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="apoyo_psicopedagogico" id="psicopedagogico">
+                            <label>Apoyo psicopedagógico</label>
+                        </div>
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="atencion_temprana" id="atencionTemprana">
+                            <label>Atención e intervención temprana</label>
+                        </div>
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="terapia_fisica_psicomotora" id="fisicaPsicomotora">
+                            <label>Terapia física y psicomotora</label>
+                        </div>
+                    </div>
+                    <div class="w-full flex flex-row justify-between items-center gap-x-5">
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="terapia_alimentaria" id="alimentaria">
+                            <label>Terapia alimentaria</label>
+                        </div>
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <input type="checkbox" name="terapia_artistica" id="artistica">
+                            <label>Terapia artística</label>
+                        </div>
+                        <div class="flex flex-row justify-start items-center space-x-2 flex-1">
+                            <!-- Espacio vacío para mantener alineación -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 9-->
+            <div>
+                <label class="block text-lg font-medium">9. ¿Cuánto tiempo de duración tiene o estuvo en
+                    terapias?</label>
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="mes">
+                        <span>Meses</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="años">
+                        <span>Años</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pregunta 10-->
+            <div>
+                <label class="block text-lg font-medium">10. ¿Dónde recibe o ha recibido terapia?</label>
+                <input
+                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="text" placeholder="Ingrese nombre" disabled>
+            </div>
+
+            <!-- Pregunta 11-->
+            <div>
+                <label class="block text-lg font-medium"> 11. ¿Cuándo fue la última terapia?
+                </label>
+                <input class="p-2 border rounded-md mt-5" type="date" name="ultimaTerapia" id="ultimaTerapia" disabled>
+            </div>
+        </form>
+
+        <form id="form2" class="form-step space-y-10">
+            <h2 class="text-lg font-semibold mb-6">Titulo de sección</h2>
+
+
+            <!--Pregunta 12-->
+            <!--Cargar desde ViewBag-->
+            <div>
+                <label class="block text-lg font-medium">12. ¿Con quién reside el niño?</label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
+                    <option value="1" selected>Seleccione una opción</option>
+                </select>
+            </div>
+
+            <!--Pregunta 13-->
+            <div>
+                <label class="block text-lg font-medium">13. ¿Tiene el niño uno de sus progenitores
+                    fallecidos?</label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar">
+                    <option value="1" selected>Seleccione una opción</option>
+                    <option value="Madre">Madre</option>
+                    <option value="Padre">Padre</option>
+                    <option value="Ambos">Ambos</option>
+                    <option value="Ninguno">Ninguno</option>
+
+                </select>
+            </div>
+
+            <!--Pregunta 14-->
+            <!--Cargar desde ViewBag-->
+            <div>
+                <label class="block text-lg font-medium">14. ¿Ha sido abandonado el niño por uno de sus
+                    progenitores?</label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Preguntas 15-->
+            <!--Cargar desde ViewBag-->
+            <div>
+                <label class="block text-lg font-medium">15. ¿Cómo describiría la dinámica entre los padres?</label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
+                    <option value="1" selected>Seleccione una opción</option>
+                </select>
+            </div>
+
+            <!--Pregunta 16-->
+            <div>
+                <label class="block text-lg font-medium">16. ¿Quién cuida al niño?</label>
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="otro">
+                        <span>Otro</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 17-->
+            <!--Cargar desde ViewBag-->
+            <div>
+                <label class="block text-lg font-medium">17. ¿Cómo es la relación del niño con el cuidador
+                    principal?</label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
+                    <option value="1" selected>Seleccione una opción</option>
+                </select>
+            </div>
+
+            <!--Pregunta 18-->
+            <div>
+                <label class="block text-lg font-medium">18. ¿Participa el niño en actividades con la
+                    familia?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 19-->
+            <div>
+                <label class="block text-lg font-medium">19. ¿Con qué frecuencia?</label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar">
+                    <option value="">Seleccione una opción</option>
+                    <option value="pocas veces">Pocas veces</option>
+                    <option value="casi siempre">Casi siempre</option>
+                    <option value="siempre">Siempre</option>
+                </select>
+            </div>
+
+            <!--Pregunta 20-->
+            <div>
+                <label class="block text-lg font-medium">20. ¿Cuánto tiempo de duración tiene o estuvo en
+                    terapias?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 21-->
+            <div>
+                <label class="block text-lg font-medium">21. ¿Es capaz el niño de seguir instrucciones?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 22-->
+            <!--Cargar desde ViewBag-->
+            <div>
+                <label class="block text-lg font-medium">22. ¿Con quién duerme el niño?</label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
+                    <option value="1" selected>Seleccione una opción</option>
+                </select>
+            </div>
+
+            <!--Pregunta 23-->
+            <!--Cargar desde ViewBag-->
+            <div>
+                <label class="block text-lg font-medium">23. En el último año ¿Ha habido cambios significativos en
+                    la vida del niño?</label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
+                    <option value="1" selected>Seleccione una opción</option>
+                </select>
+            </div>
+        </form>
+
+        <form id="form3" class="form-step hidden">
+            <h2 class="text-xl font-semibold mb-6">Titulo de sección</h2>
+
+            <!--Pregunta 24-->
+            <div>
+                <label class="block text-lg font-medium">24. ¿Asiste el niño a la escuela?</label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--Pregunta 25-->
+            <div>
+                <label class="block text-lg font-medium mt-5"> 25. ¿Asiste el niño a un centro de cuidado o estancia
+                    infantil?
+                </label>
+
+                <div class="flex flex-row gap-x-5 mt-5">
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="si">
+                        <span>Sí</span>
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" name="respuesta" value="no">
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+        </form>
+
+        <form id="form4" class="form-step hidden">
+            <h2 class="text-xl font-semibold mb-6">Titulo de sección</h2>
+            <p>Final confirmation...</p>
+        </form>
+
+        <!-- Buttons -->
+        <div class="flex justify-between pt-6 w-60 mx-auto">
+            <button id="prevBtn"
+                class="px-6 py-2 rounded-full bg-[#536de5] text-white font-medium shadow hover:bg-[#536de5]/90 transition">
+                Atras
+            </button>
+            <button id="nextBtn"
+                class="px-6 py-2 rounded-full bg-[#536de5] text-white font-medium shadow hover:bg-[#536de5]/90 transition">
+                Continuar
+            </button>
+        </div>
+    </div>
+    <script>
+        let currentStep = 3;
+        const totalSteps = 4;
+
+        const updateSteps = () => {
+            // Mostrar/ocultar formularios
+            document.querySelectorAll('.form-step').forEach((form, index) => {
+                form.classList.toggle('hidden', index + 1 !== currentStep);
+            });
+
+            // Actualizar el color del indicador
+            document.querySelectorAll('.step').forEach((el, index) => {
+                if (index + 1 === currentStep) {
+                    el.classList.add('bg-[#536de5]', 'text-white');
+                } else {
+                    el.classList.remove('bg-[#536de5]', 'text-white');
+                }
+            });
+        };
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentStep < totalSteps) currentStep++;
+            updateSteps();
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentStep > 1) currentStep--;
+            updateSteps();
+        });
+
+        updateSteps();
+    </script>
+</body>
+
+</html>
