@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8" />
@@ -7,6 +7,48 @@
     <title>Form Wizard</title>
     <link rel="stylesheet" href="input.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos para transiciones suaves */
+        .question-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .question-hidden {
+            opacity: 0;
+            max-height: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            transform: translateY(-10px);
+        }
+
+        .question-visible {
+            opacity: 1;
+            max-height: 500px;
+            margin-top: 2.5rem;
+            margin-bottom: 0;
+            transform: translateY(0);
+        }
+
+        /* Animación de entrada suave */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50 min-h-screen flex items-center justify-center px-4">
@@ -40,98 +82,105 @@
         </div>
 
         <!-- Form 1 -->
-        <form id="form1" class="form-step hidden space-y-10">
+        <form id="form1" class="form-step space-y-10">
             <h2 class="text-xl font-semibold mb-6 ">Titulo de sección</h2>
 
             <!-- Pregunta 1-->
             <div>
-                <label class="block text-lg font-medium">1. ¿Cuál es el motivo de consulta?</label>
-                <textarea name="" id=""
-                    class="w-full mt-5 border rounded-md p-2 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    rows="4" disabled></textarea>
+                <h2 class="block text-lg font-medium">1. ¿Cuál es el motivo de consulta? <span
+                        class="text-red-500">*</span>
+                </h2>
+
+                <textarea name="motivoConsulta" id="motivoConsulta"
+                    class="w-full mt-5 border rounded-md p-2 focus:ring-[#536de5] focus:border-[#536de5] outline-none text-black"
+                    rows="4" placeholder="Motivo de la consulta">
+                </textarea>
             </div>
 
             <!-- Pregunta 2-->
-            <div>
+            <div id="pregunta2">
                 <label class="block text-lg font-medium" for="">2. ¿Ha sido referido para evaluación del desarrollo y
-                    diagnostico?
+                    diagnostico? <span class="text-red-500">*</span>
                 </label>
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="referido" value="si" onchange="handlePregunta2(this)">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="referido" value="no" onchange="handlePregunta2(this)">
                         <span>No</span>
                     </label>
                 </div>
             </div>
 
             <!-- Pregunta 3-->
-            <div>
+            <div id="pregunta3" class="question-transition question-hidden">
                 <label class="block text-lg font-medium">3. ¿Quién es la persona o entidad que realiza el
-                    referimiento o recomendación?</label>
+                    referimiento o recomendación? <span class="text-red-500">*</span></label>
                 <input
                     class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="text" placeholder="Ingrese nombre" disabled>
+                    type="text" name="persona_referimiento" placeholder="Ingrese nombre">
             </div>
 
             <!-- Pregunta 4-->
-            <div>
-                <label class="block text-lg font-medium">4. ¿Tiene el niño un diagnostico previo?</label>
+            <div id="pregunta4">
+                <label class="block text-lg font-medium">4. ¿Tiene el niño un diagnostico previo? <span
+                        class="text-red-500">*</span></label>
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="diagnostico_previo" value="si" onchange="handlePregunta4(this)">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="diagnostico_previo" value="no" onchange="handlePregunta4(this)">
                         <span>No</span>
                     </label>
                 </div>
             </div>
 
             <!-- Pregunta 5-->
-            <div>
-                <label class="block text-lg font-medium">5. ¿Cuál es el diagnóstico previo?</label>
+            <div id="pregunta5" class="question-transition question-hidden">
+                <label class="block text-lg font-medium">5. ¿Cuál es el diagnóstico previo? <span
+                        class="text-red-500">*</span></label>
                 <input
                     class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="text" value="" placeholder="Ingrese nombre" disabled>
+                    type="text" name="cual_diagnostico" value="" placeholder="Ingrese diagnóstico">
             </div>
 
             <!-- Pregunta 6-->
-            <div>
+            <div id="pregunta6" class="question-transition question-hidden">
                 <label class="block text-lg font-medium">6. ¿Cuál fue el centro profesional que realizó el
-                    diagnóstico?</label>
+                    diagnóstico? <span class="text-red-500">*</span></label>
                 <input
                     class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="text" value="" placeholder="Ingrese nombre" disabled>
+                    type="text" name="centro_profesional" value="" placeholder="Ingrese nombre del centro">
             </div>
 
             <!-- Pregunta 7-->
-            <div>
+            <div id="pregunta7">
                 <label class="block text-lg font-medium">7. ¿El niño recibe o ha recibido intervención
-                    terapéutica?</label>
+                    terapéutica? <span class="text-red-500">*</span></label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="intervencion_terapeutica" value="si" onchange="handlePregunta7(this)">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="intervencion_terapeutica" value="no" onchange="handlePregunta7(this)">
                         <span>No</span>
                     </label>
                 </div>
             </div>
 
             <!-- Pregunta 8-->
-            <div class="max-w-4xl text-xs md:text-base">
-                <h2 class="block text-lg font-medium"> 8. ¿Cuáles terapias recibe o ha recibido?
+            <div id="pregunta8" class="max-w-4xl text-xs md:text-base question-transition question-hidden">
+                <h2 class="block text-lg font-medium"> 8. ¿Cuáles terapias recibe o ha recibido? <span
+                        class="text-red-500">*</span>
                 </h2>
                 <div class="flex flex-col space-y-5">
                     <div class="w-full flex flex-row justify-between items-center gap-x-5 mt-5">
@@ -179,62 +228,69 @@
             </div>
 
             <!-- Pregunta 9-->
-            <div>
+            <div id="pregunta9" class="question-transition question-hidden">
                 <label class="block text-lg font-medium">9. ¿Cuánto tiempo de duración tiene o estuvo en
-                    terapias?</label>
+                    terapias? <span class="text-red-500">*</span></label>
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="mes">
+                        <input type="radio" name="duracion_terapias" value="mes">
                         <span>Meses</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="años">
+                        <input type="radio" name="duracion_terapias" value="años">
                         <span>Años</span>
                     </label>
                 </div>
             </div>
 
             <!-- Pregunta 10-->
-            <div>
-                <label class="block text-lg font-medium">10. ¿Dónde recibe o ha recibido terapia?</label>
+            <div id="pregunta10" class="question-transition question-hidden">
+                <label class="block text-lg font-medium">10. ¿Dónde recibe o ha recibido terapia? <span
+                        class="text-red-500">*</span></label>
                 <input
                     class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="text" placeholder="Ingrese nombre" disabled>
+                    type="text" placeholder="Ingrese nombre">
             </div>
 
             <!-- Pregunta 11-->
-            <div>
-                <label class="block text-lg font-medium"> 11. ¿Cuándo fue la última terapia?
+            <div id="pregunta11" class="question-transition question-hidden">
+                <label class="block text-lg font-medium"> 11. ¿Cuándo fue la última terapia? <span
+                        class="text-red-500">*</span></label>
                 </label>
-                <input class="p-2 border rounded-md mt-5" type="date" name="ultimaTerapia" id="ultimaTerapia" disabled>
+                <input class="p-2 border rounded-md mt-5" type="date" name="ultimaTerapia" id="ultimaTerapia">
             </div>
         </form>
 
-        <form id="form2" class="form-step space-y-10">
+        <form id="form2" class="form-step hidden space-y-10">
             <h2 class="text-lg font-semibold mb-6">Titulo de sección</h2>
 
 
             <!--Pregunta 12-->
             <!--Cargar desde ViewBag-->
             <div>
-                <label class="block text-lg font-medium">12. ¿Con quién reside el niño?</label>
-                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
-                    <option value="1" selected>Seleccione una opción</option>
+                <label class="block text-lg font-medium">12. ¿Con quién reside el niño? <span
+                        class="text-red-500">*</span></label>
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar">
+                    <option value="">Seleccione una opción</option>
+                    <option value="padres">Ambos padres</option>
+                    <option value="madre">Solo madre</option>
+                    <option value="padre">Solo padre</option>
+                    <option value="abuelos">Abuelos</option>
+                    <option value="otros">Otros familiares</option>
                 </select>
             </div>
 
             <!--Pregunta 13-->
             <div>
                 <label class="block text-lg font-medium">13. ¿Tiene el niño uno de sus progenitores
-                    fallecidos?</label>
+                    fallecidos? <span class="text-red-500">*</span></label>
                 <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar">
                     <option value="1" selected>Seleccione una opción</option>
                     <option value="Madre">Madre</option>
                     <option value="Padre">Padre</option>
                     <option value="Ambos">Ambos</option>
                     <option value="Ninguno">Ninguno</option>
-
                 </select>
             </div>
 
@@ -242,16 +298,16 @@
             <!--Cargar desde ViewBag-->
             <div>
                 <label class="block text-lg font-medium">14. ¿Ha sido abandonado el niño por uno de sus
-                    progenitores?</label>
+                    progenitores? <span class="text-red-500">*</span></label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="abandonado_progenitor" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="abandonado_progenitor" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -261,28 +317,36 @@
             <!--Cargar desde ViewBag-->
             <div>
                 <label class="block text-lg font-medium">15. ¿Cómo describiría la dinámica entre los padres?</label>
-                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
-                    <option value="1" selected>Seleccione una opción</option>
+                <select class="border p-2 rounded-md mt-5" name="dinamicaPadres" id="dinamicaPadres">
+                    <option value="">Seleccione una opción</option>
+                    <option value="muy_buena">Muy buena</option>
+                    <option value="buena">Buena</option>
+                    <option value="regular">Regular</option>
+                    <option value="mala">Mala</option>
+                    <option value="muy_mala">Muy mala</option>
                 </select>
             </div>
 
             <!--Pregunta 16-->
             <div>
-                <label class="block text-lg font-medium">16. ¿Quién cuida al niño?</label>
-                <div class="flex flex-row gap-x-5 mt-5">
+                <h2 class="block text-lg font-medium">16. ¿Quién cuida al niño?</h2>
+                <div class="flex flex-row gap-x-5 mt-5 items-center">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
-                        <span>Sí</span>
+                        <input type="radio" name="quien_cuida" value="padre">
+                        <span>Padre</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
-                        <span>No</span>
+                        <input type="radio" name="quien_cuida" value="madre">
+                        <span>Madre</span>
                     </label>
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="otro">
+                        <input type="radio" name="quien_cuida" value="otro">
                         <span>Otro</span>
                     </label>
+
+                    <input type="text" name="otroCuidador" placeholder="Especifique" class="border p-2 rounded-md"
+                        hidden>
                 </div>
             </div>
 
@@ -291,34 +355,39 @@
             <div>
                 <label class="block text-lg font-medium">17. ¿Cómo es la relación del niño con el cuidador
                     principal?</label>
-                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
-                    <option value="1" selected>Seleccione una opción</option>
+                <select class="border p-2 rounded-md mt-5" name="relacionCuidador" id="relacionCuidador">
+                    <option value="">Seleccione una opción</option>
+                    <option value="excelente">Excelente</option>
+                    <option value="muy_buena">Muy buena</option>
+                    <option value="buena">Buena</option>
+                    <option value="regular">Regular</option>
+                    <option value="mala">Mala</option>
                 </select>
             </div>
 
             <!--Pregunta 18-->
-            <div>
+            <div id="pregunta18">
                 <label class="block text-lg font-medium">18. ¿Participa el niño en actividades con la
                     familia?
                 </label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="participa_familia" value="si" onchange="handlePregunta18(this)">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="participa_familia" value="no" onchange="handlePregunta18(this)">
                         <span>No</span>
                     </label>
                 </div>
             </div>
 
             <!--Pregunta 19-->
-            <div>
+            <div id="pregunta19" class="question-transition question-hidden">
                 <label class="block text-lg font-medium">19. ¿Con qué frecuencia?</label>
-                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar">
+                <select class="border p-2 rounded-md mt-5" name="frecuencia_participacion">
                     <option value="">Seleccione una opción</option>
                     <option value="pocas veces">Pocas veces</option>
                     <option value="casi siempre">Casi siempre</option>
@@ -327,19 +396,19 @@
             </div>
 
             <!--Pregunta 20-->
-            <div>
+            <div id="pregunta20">
                 <label class="block text-lg font-medium">20. ¿Cuánto tiempo de duración tiene o estuvo en
                     terapias?
                 </label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="duracion_terapias_tiempo" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="duracion_terapias_tiempo" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -352,12 +421,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="seguir_instrucciones" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="seguir_instrucciones" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -367,8 +436,12 @@
             <!--Cargar desde ViewBag-->
             <div>
                 <label class="block text-lg font-medium">22. ¿Con quién duerme el niño?</label>
-                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
-                    <option value="1" selected>Seleccione una opción</option>
+                <select class="border p-2 rounded-md mt-5" name="duermecon" id="duermecon">
+                    <option value="">Seleccione una opción</option>
+                    <option value="solo">Solo en su cuarto</option>
+                    <option value="padres">Con los padres</option>
+                    <option value="hermanos">Con hermanos</option>
+                    <option value="otros">Con otros familiares</option>
                 </select>
             </div>
 
@@ -377,8 +450,15 @@
             <div>
                 <label class="block text-lg font-medium">23. En el último año ¿Ha habido cambios significativos en
                     la vida del niño?</label>
-                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar" disabled>
-                    <option value="1" selected>Seleccione una opción</option>
+                <select class="border p-2 rounded-md mt-5" name="cambiosSignificativos" id="cambiosSignificativos">
+                    <option value="">Seleccione una opción</option>
+                    <option value="ninguno">Ningún cambio</option>
+                    <option value="mudanza">Mudanza</option>
+                    <option value="cambio_escuela">Cambio de escuela</option>
+                    <option value="separacion_padres">Separación de padres</option>
+                    <option value="nacimiento_hermano">Nacimiento de hermano</option>
+                    <option value="fallecimiento">Fallecimiento familiar</option>
+                    <option value="otros">Otros</option>
                 </select>
             </div>
         </form>
@@ -392,12 +472,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="asiste_escuela" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="asiste_escuela" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -411,12 +491,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="asiste_centro_cuidado" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="asiste_centro_cuidado" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -429,7 +509,7 @@
                 </label>
                 <input
                     class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="number" placeholder="Ingrese edad" disabled>
+                    type="number" placeholder="Ingrese edad">
             </div>
 
             <!--Pregunta 27-->
@@ -439,7 +519,7 @@
                 </label>
                 <input
                     class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="text" placeholder="Ingrese nombre" disabled>
+                    type="text" placeholder="Ingrese nombre">
             </div>
 
             <!--Pregunta 28-->
@@ -449,7 +529,7 @@
                 </label>
                 <input
                     class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="text" placeholder="Ingrese nombre" disabled>
+                    type="text" placeholder="Ingrese nombre">
             </div>
 
             <!--Pregunta 29-->
@@ -460,17 +540,17 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="tipo_centro_educativo" value="publico">
                         <span>Público</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="tipo_centro_educativo" value="privado">
                         <span>Privado</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="otro">
+                        <input type="radio" name="tipo_centro_educativo" value="otro">
                         <span>Otro</span>
                     </label>
                 </div>
@@ -500,12 +580,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="conDificultad">
+                        <input type="radio" name="adaptacion_centro" value="conDificultad">
                         <span>Con dificultad</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="sinDificultad">
+                        <input type="radio" name="adaptacion_centro" value="sinDificultad">
                         <span>Sin dificultad</span>
                     </label>
                 </div>
@@ -519,22 +599,22 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="excelente">
+                        <input type="radio" name="experiencia_escolar" value="excelente">
                         <span>Excelente</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="bueno">
+                        <input type="radio" name="experiencia_escolar" value="bueno">
                         <span>Bueno</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="regular">
+                        <input type="radio" name="experiencia_escolar" value="regular">
                         <span>Regular</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="deficiente">
+                        <input type="radio" name="experiencia_escolar" value="deficiente">
                         <span>Deficiente</span>
                     </label>
                 </div>
@@ -549,22 +629,22 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="excelente">
+                        <input type="radio" name="apoyo_maestros" value="excelente">
                         <span>Excelente</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="bueno">
+                        <input type="radio" name="apoyo_maestros" value="bueno">
                         <span>Bueno</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="regular">
+                        <input type="radio" name="apoyo_maestros" value="regular">
                         <span>Regular</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="deficiente">
+                        <input type="radio" name="apoyo_maestros" value="deficiente">
                         <span>Deficiente</span>
                     </label>
                 </div>
@@ -579,22 +659,22 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="excelente">
+                        <input type="radio" name="desempeno_aula" value="excelente">
                         <span>Excelente</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="bueno">
+                        <input type="radio" name="desempeno_aula" value="bueno">
                         <span>Bueno</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="regular">
+                        <input type="radio" name="desempeno_aula" value="regular">
                         <span>Regular</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="deficiente">
+                        <input type="radio" name="desempeno_aula" value="deficiente">
                         <span>Deficiente</span>
                     </label>
                 </div>
@@ -610,12 +690,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="asiste_sala_tarea" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="asiste_sala_tarea" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -628,22 +708,22 @@
                 </label>
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Siempre">
+                        <input type="radio" name="se_relaciona_ninos" value="Siempre">
                         <span>Siempre</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="La mayor parte del tiempo">
+                        <input type="radio" name="se_relaciona_ninos" value="La mayor parte del tiempo">
                         <span>La mayor parte del tiempo</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="A veces">
+                        <input type="radio" name="se_relaciona_ninos" value="A veces">
                         <span>A veces</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Permanece aislado">
+                        <input type="radio" name="se_relaciona_ninos" value="Permanece aislado">
                         <span>Permanece aislado</span>
                     </label>
                 </div>
@@ -657,12 +737,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="participa_comunidad" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="participa_comunidad" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -676,18 +756,18 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Lo Integran">
+                        <input type="radio" name="interaccion_vecinos" value="Lo Integran">
                         <span>Lo integran</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Lo rechazan">
+                        <input type="radio" name="interaccion_vecinos" value="Lo rechazan">
                         <span>Lo rechazan</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Lo rechazan">
-                        <span>Lo rechazan</span>
+                        <input type="radio" name="interaccion_vecinos" value="Indiferente">
+                        <span>Indiferente</span>
                     </label>
                 </div>
             </div>
@@ -701,12 +781,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="familia_excluida" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="familia_excluida" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -720,12 +800,12 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="si">
+                        <input type="radio" name="cuenta_red_apoyo" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="no">
+                        <input type="radio" name="cuenta_red_apoyo" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -740,17 +820,17 @@
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Primaria">
+                        <input type="radio" name="tipo_red_apoyo" value="Primaria">
                         <span>Primaria</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Secundaria">
+                        <input type="radio" name="tipo_red_apoyo" value="Secundaria">
                         <span>Secundaria</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="respuesta" value="Formal">
+                        <input type="radio" name="tipo_red_apoyo" value="Formal">
                         <span>Formal</span>
                     </label>
                 </div>
@@ -771,59 +851,150 @@
         </div>
     </div>
     <script>
-        let currentStep = 1;
+        let currentStep = 2;
         const totalSteps = 4;
 
-        // AGREGAR ASTERISCOS ROJOS A CAMPOS OBLIGATORIOS
-        const addRequiredAsterisks = () => {
-            document.querySelectorAll('.form-step').forEach(form => {
-                // Buscar labels de preguntas que no estén deshabilitadas
-                const questionBlocks = form.querySelectorAll('div');
+        // FUNCIONES PARA LÓGICA CONDICIONAL
 
-                questionBlocks.forEach(block => {
-                    const label = block.querySelector('label.block');
-                    if (!label) return;
+        // Función para la pregunta 2: Si "Sí" → pregunta 3, Si "No" → pregunta 4
+        function handlePregunta2(radio) {
+            const pregunta3 = document.getElementById('pregunta3');
 
-                    // Verificar si el bloque tiene campos no deshabilitados
-                    const hasRequiredFields =
-                        block.querySelector('textarea:not([disabled])') ||
-                        block.querySelector('input[type="text"]:not([disabled])') ||
-                        block.querySelector('input[type="number"]:not([disabled])') ||
-                        block.querySelector('input[type="radio"]:not([disabled])') ||
-                        block.querySelector('input[type="checkbox"]:not([disabled])') ||
-                        block.querySelector('select:not([disabled])');
+            if (radio.value === 'si') {
+                pregunta3.classList.remove('question-hidden');
+                pregunta3.classList.add('question-visible', 'fade-in-up');
+            } else {
+                pregunta3.classList.remove('question-visible', 'fade-in-up');
+                pregunta3.classList.add('question-hidden');
+                // Limpiar el campo de la pregunta 3 si se oculta
+                setTimeout(() => {
+                    const input3 = pregunta3.querySelector('input[name="persona_referimiento"]');
+                    if (input3) input3.value = '';
+                }, 300);
+            }
+        }
 
-                    if (hasRequiredFields && !label.querySelector('.required-asterisk')) {
-                        const asterisk = document.createElement('span');
-                        asterisk.className = 'required-asterisk text-red-500 ml-1';
-                        asterisk.innerHTML = '*';
-                        label.appendChild(asterisk);
-                    }
+        // Función para la pregunta 4: Si "Sí" → preguntas 5-6, Si "No" → pregunta 7
+        function handlePregunta4(radio) {
+            const pregunta5 = document.getElementById('pregunta5');
+            const pregunta6 = document.getElementById('pregunta6');
+
+            if (radio.value === 'si') {
+                // Mostrar pregunta 5
+                pregunta5.classList.remove('question-hidden');
+                pregunta5.classList.add('question-visible', 'fade-in-up');
+
+                // Mostrar pregunta 6 con un pequeño delay
+                setTimeout(() => {
+                    pregunta6.classList.remove('question-hidden');
+                    pregunta6.classList.add('question-visible', 'fade-in-up');
+                }, 150);
+            } else {
+                pregunta5.classList.remove('question-visible', 'fade-in-up');
+                pregunta5.classList.add('question-hidden');
+                pregunta6.classList.remove('question-visible', 'fade-in-up');
+                pregunta6.classList.add('question-hidden');
+
+                // Limpiar los campos de las preguntas 5-6 si se ocultan
+                setTimeout(() => {
+                    const input5 = pregunta5.querySelector('input[name="cual_diagnostico"]');
+                    const input6 = pregunta6.querySelector('input[name="centro_profesional"]');
+                    if (input5) input5.value = '';
+                    if (input6) input6.value = '';
+                }, 300);
+            }
+        }
+
+        // Función para la pregunta 7: Si "Sí" → preguntas 8-11, Si "No" → habilitar continuar
+        function handlePregunta7(radio) {
+            const pregunta8 = document.getElementById('pregunta8');
+            const pregunta9 = document.getElementById('pregunta9');
+            const pregunta10 = document.getElementById('pregunta10');
+            const pregunta11 = document.getElementById('pregunta11');
+
+            if (radio.value === 'si') {
+                // Mostrar preguntas con delays escalonados para efecto suave
+                pregunta8.classList.remove('question-hidden');
+                pregunta8.classList.add('question-visible', 'fade-in-up');
+
+                setTimeout(() => {
+                    pregunta9.classList.remove('question-hidden');
+                    pregunta9.classList.add('question-visible', 'fade-in-up');
+                }, 150);
+
+                setTimeout(() => {
+                    pregunta10.classList.remove('question-hidden');
+                    pregunta10.classList.add('question-visible', 'fade-in-up');
+                }, 300);
+
+                setTimeout(() => {
+                    pregunta11.classList.remove('question-hidden');
+                    pregunta11.classList.add('question-visible', 'fade-in-up');
+                }, 450);
+            } else {
+                // Ocultar todas las preguntas
+                [pregunta8, pregunta9, pregunta10, pregunta11].forEach(pregunta => {
+                    pregunta.classList.remove('question-visible', 'fade-in-up');
+                    pregunta.classList.add('question-hidden');
                 });
-            });
-        };
+
+                // Limpiar los campos de las preguntas 8-11 si se ocultan
+                setTimeout(() => {
+                    const checkboxes8 = pregunta8.querySelectorAll('input[type="checkbox"]');
+                    checkboxes8.forEach(cb => cb.checked = false);
+
+                    const radios9 = pregunta9.querySelectorAll('input[type="radio"]');
+                    radios9.forEach(rb => rb.checked = false);
+
+                    const input10 = pregunta10.querySelector('input');
+                    if (input10) input10.value = '';
+
+                    const input11 = pregunta11.querySelector('input');
+                    if (input11) input11.value = '';
+                }, 300);
+            }
+        }
+
+        // Función para la pregunta 18: Si "Sí" → pregunta 19, Si "No" → pregunta 20
+        function handlePregunta18(radio) {
+            const pregunta19 = document.getElementById('pregunta19');
+
+            if (radio.value === 'si') {
+                pregunta19.classList.remove('question-hidden');
+                pregunta19.classList.add('question-visible', 'fade-in-up');
+            } else {
+                pregunta19.classList.remove('question-visible', 'fade-in-up');
+                pregunta19.classList.add('question-hidden');
+
+                // Limpiar el campo de la pregunta 19 si se oculta
+                setTimeout(() => {
+                    const select19 = pregunta19.querySelector('select[name="frecuencia_participacion"]');
+                    if (select19) select19.value = '';
+                }, 300);
+            }
+        }
+
 
         // LIMPIAR MENSAJES DE ERROR PREVIOS
         const clearValidationErrors = () => {
-            const currentForm = document.getElementById(`form${currentStep}`);
+            const formularioActual = document.getElementById(`form${currentStep}`);
 
             // Remover bordes rojos
-            currentForm.querySelectorAll('.border-red-500').forEach(el => {
-                el.classList.remove('border-red-500');
-                el.classList.add('border');
+            formularioActual.querySelectorAll('.border-red-500').forEach(element => {
+                element.classList.remove('border-red-500');
+                element.classList.add('border');
             });
 
             // Remover mensajes de error
-            currentForm.querySelectorAll('.error-message').forEach(el => el.remove());
+            formularioActual.querySelectorAll('.error-message').forEach(element => element.remove());
         };
 
         // MOSTRAR ERROR EN UN BLOQUE ESPECÍFICO
-        const showError = (questionBlock, message) => {
+        const mostrarError = (questionBlock, message) => {
             // Agregar borde rojo a los campos
-            const fields = questionBlock.querySelectorAll('input, textarea, select');
-            fields.forEach(field => {
+            const campos = questionBlock.querySelectorAll('input, textarea, select');
+            campos.forEach(field => {
                 field.classList.add('border-red-500');
-                field.classList.remove('border');
             });
 
             // Crear mensaje de error
@@ -835,18 +1006,19 @@
             questionBlock.appendChild(errorDiv);
         };
 
-        // VALIDACIÓN MEJORADA CON ERRORES VISUALES
-        const validateCurrentForm = () => {
-            const currentForm = document.getElementById(`form${currentStep}`);
+        // VALIDACIÓN MEJORADA CON ERRORES VISUALES Y LÓGICA CONDICIONAL
+        const validarFormularioActual = () => {
+            const formularioActual = document.getElementById(`form${currentStep}`);
             let isValid = true;
 
             // Limpiar errores previos
             clearValidationErrors();
 
-            // Obtener todos los bloques de preguntas (divs que contienen campos)
-            const questionBlocks = Array.from(currentForm.children).filter(child =>
+            // Obtener todos los bloques de preguntas (divs que contienen campos) QUE ESTÉN VISIBLES
+            const questionBlocks = Array.from(formularioActual.children).filter(child =>
                 child.tagName === 'DIV' &&
-                (child.querySelector('input, textarea, select'))
+                (child.querySelector('input, textarea, select')) &&
+                !child.classList.contains('question-hidden') // Solo validar elementos visibles
             );
 
             questionBlocks.forEach(block => {
@@ -854,21 +1026,21 @@
                 let errorMessage = '';
 
                 // 1. VALIDAR TEXTAREAS
-                const textarea = block.querySelector('textarea:not([disabled])');
+                const textarea = block.querySelector('textarea');
                 if (textarea && !textarea.value.trim()) {
                     blockIsValid = false;
                     errorMessage = 'Este campo de texto es obligatorio';
                 }
 
-                // 2. VALIDAR INPUTS DE TEXTO Y NÚMERO
-                const textInput = block.querySelector('input[type="text"]:not([disabled]), input[type="number"]:not([disabled])');
+                // 2. VALIDAR INPUTS DE TEXTO, NÚMERO Y FECHA
+                const textInput = block.querySelector('input[type="text"], input[type="number"], input[type="date"]');
                 if (textInput && !textInput.value.trim()) {
                     blockIsValid = false;
                     errorMessage = 'Este campo es obligatorio';
                 }
 
                 // 3. VALIDAR RADIO BUTTONS
-                const radios = block.querySelectorAll('input[type="radio"]:not([disabled])');
+                const radios = block.querySelectorAll('input[type="radio"]');
                 if (radios.length > 0) {
                     const isChecked = Array.from(radios).some(radio => radio.checked);
                     if (!isChecked) {
@@ -878,9 +1050,9 @@
                 }
 
                 // 4. VALIDAR CHECKBOXES
-                const checkboxes = block.querySelectorAll('input[type="checkbox"]:not([disabled])');
+                const checkboxes = block.querySelectorAll('input[type="checkbox"]');
                 if (checkboxes.length > 0) {
-                    const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+                    const isChecked = Array.from(checkboxes).some(callback => callback.checked);
                     if (!isChecked) {
                         blockIsValid = false;
                         errorMessage = 'Debe seleccionar al menos una opción';
@@ -888,15 +1060,13 @@
                 }
 
                 // 5. VALIDAR SELECTS
-                const select = block.querySelector('select:not([disabled])');
-                if (select && (!select.value || select.value === '' || select.value === '1')) {
+                const select = block.querySelector('select');
+                if (select && (!select.value || select.value === '')) {
                     blockIsValid = false;
                     errorMessage = 'Debe seleccionar una opción del menú';
-                }
-
-                // Si el bloque no es válido, mostrar error
+                }                // Si el bloque no es válido, mostrar error
                 if (!blockIsValid) {
-                    showError(block, errorMessage);
+                    mostrarError(block, errorMessage);
                     isValid = false;
                 }
             });
@@ -931,10 +1101,10 @@
         };
 
         // BOTÓN SIGUIENTE CON VALIDACIÓN VISUAL
-        document.getElementById('nextBtn').addEventListener('click', (e) => {
-            e.preventDefault();
+        document.getElementById('nextBtn').addEventListener('click', (event) => {
+            event.preventDefault();
 
-            if (validateCurrentForm()) {
+            if (validarFormularioActual()) {
                 if (currentStep < totalSteps) {
                     currentStep++;
                     updateSteps();
@@ -946,8 +1116,8 @@
         });
 
         // BOTÓN ANTERIOR
-        document.getElementById('prevBtn').addEventListener('click', (e) => {
-            e.preventDefault();
+        document.getElementById('prevBtn').addEventListener('click', (event) => {
+            event.preventDefault();
             if (currentStep > 1) {
                 currentStep--;
                 updateSteps();
@@ -955,21 +1125,7 @@
         });
 
         // INICIALIZACIÓN
-        document.addEventListener('DOMContentLoaded', () => {
-            addRequiredAsterisks();
-            updateSteps();
-        });
-
-        // Fallback si DOMContentLoaded ya pasó
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                addRequiredAsterisks();
-                updateSteps();
-            });
-        } else {
-            addRequiredAsterisks();
-            updateSteps();
-        }
+        updateSteps();
     </script>
 </body>
 
