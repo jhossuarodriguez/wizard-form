@@ -16,20 +16,39 @@
 
         .question-hidden {
             opacity: 0;
-            max-height: 0;
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-top: 0;
-            padding-bottom: 0;
+            max-height: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
             transform: translateY(-10px);
+            pointer-events: none;
         }
 
         .question-visible {
             opacity: 1;
-            max-height: 500px;
-            margin-top: 2.5rem;
+            max-height: 1000px;
+            margin-top: 1.25rem;
             margin-bottom: 0;
             transform: translateY(0);
+        }
+
+        /* Transición para formularios */
+        .form-step {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .form-step.hidden {
+            opacity: 0;
+            transform: translateX(-20px);
+            pointer-events: none;
+            position: absolute;
+        }
+
+        .form-step:not(.hidden) {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
         }
 
         /* Animación de entrada suave */
@@ -48,6 +67,45 @@
         .fade-in-up {
             animation: fadeInUp 0.5s ease-out forwards;
         }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        /* Estilos para los indicadores de pasos */
+        .step {
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .step.active {
+            background-color: white;
+            color: #536de5;
+            border-bottom: 3px solid #536de5;
+            font-weight: 600;
+        }
+
+        .step:not(.active) {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            border-bottom: 3px solid transparent;
+        }
+
+        .step-connector {
+            transition: background-color 0.3s ease;
+        }
     </style>
 </head>
 
@@ -55,35 +113,28 @@
 
     <div class="w-full max-w-[1467px] h-auto bg-white shadow-md rounded-2xl p-8">
         <!-- Section indicators -->
-        <div class="flex items-center justify-center mb-10">
-            <div class="flex items-center">
-                <div id="step1"
-                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] text-gray-500">
-                    1</div>
-                <div class="w-20 h-[2px] bg-[#536de5]"></div>
+        <div class="flex items-stretch mb-10 border-b border-gray-200">
+            <div id="step1"
+                class="step flex-1 py-4 px-6 text-center text-sm bg-white text-[#536de5] border-b-[3px] border-[#536de5] font-semibold">
+                Información General
             </div>
-            <div class="flex items-center">
-                <div id="step2"
-                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] bg-[#536de5] text-gray-500">
-                    2</div>
-                <div class="w-20 h-[2px] bg-[#536de5]"></div>
+            <div id="step2"
+                class="step flex-1 py-4 px-6 text-center text-sm bg-gray-100 text-gray-600 border-b-[3px] border-transparent">
+                Interacción Familiar y/o Social
             </div>
-            <div class="flex items-center">
-                <div id="step3"
-                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] text-gray-500">
-                    3</div>
-                <div class="w-20 h-[2px] bg-[#536de5]"></div>
+            <div id="step3"
+                class="step flex-1 py-4 px-6 text-center text-sm bg-gray-100 text-gray-600 border-b-[3px] border-transparent">
+                Interacción en la Escuela
             </div>
-            <div class="flex items-center">
-                <div id="step4"
-                    class="step w-8 h-8 flex items-center justify-center rounded-full border-2 border-[#536de5] text-gray-500">
-                    4</div>
+            <div id="step4"
+                class="step flex-1 py-4 px-6 text-center text-sm bg-gray-100 text-gray-600 border-b-[3px] border-transparent">
+                Interacción en la Comunidad
             </div>
         </div>
 
         <!-- Form 1 -->
         <form id="form1" class="form-step space-y-10">
-            <h2 class="text-xl font-semibold mb-6 ">Titulo de sección</h2>
+            <h2 class="text-xl font-semibold mb-6 ">Información General</h2>
 
             <!-- Pregunta 1-->
             <div>
@@ -92,9 +143,8 @@
                 </h2>
 
                 <textarea name="motivoConsulta" id="motivoConsulta"
-                    class="w-full mt-5 border rounded-md p-2 focus:ring-[#536de5] focus:border-[#536de5] outline-none text-black"
-                    rows="4" placeholder="Motivo de la consulta">
-                </textarea>
+                    class="w-[550px] mt-5 border rounded-md p-2 focus:ring-[#536de5] focus:border-[#536de5] outline-none text-black"
+                    rows="2" maxlength="500" placeholder="Motivo de la consulta"></textarea>
             </div>
 
             <!-- Pregunta 2-->
@@ -120,7 +170,7 @@
                 <label class="block text-lg font-medium">3. ¿Quién es la persona o entidad que realiza el
                     referimiento o recomendación? <span class="text-red-500">*</span></label>
                 <input
-                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
                     type="text" name="persona_referimiento" placeholder="Ingrese nombre">
             </div>
 
@@ -146,7 +196,7 @@
                 <label class="block text-lg font-medium">5. ¿Cuál es el diagnóstico previo? <span
                         class="text-red-500">*</span></label>
                 <input
-                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
                     type="text" name="cual_diagnostico" value="" placeholder="Ingrese diagnóstico">
             </div>
 
@@ -155,7 +205,7 @@
                 <label class="block text-lg font-medium">6. ¿Cuál fue el centro profesional que realizó el
                     diagnóstico? <span class="text-red-500">*</span></label>
                 <input
-                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
                     type="text" name="centro_profesional" value="" placeholder="Ingrese nombre del centro">
             </div>
 
@@ -249,7 +299,7 @@
                 <label class="block text-lg font-medium">10. ¿Dónde recibe o ha recibido terapia? <span
                         class="text-red-500">*</span></label>
                 <input
-                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
                     type="text" placeholder="Ingrese nombre">
             </div>
 
@@ -263,15 +313,16 @@
         </form>
 
         <form id="form2" class="form-step hidden space-y-10">
-            <h2 class="text-lg font-semibold mb-6">Titulo de sección</h2>
+            <h2 class="text-lg font-semibold mb-6">Interacción Familiar y/o Social</h2>
 
 
             <!--Pregunta 12-->
             <!--Cargar desde ViewBag-->
-            <div>
+            <div id="pregunta12">
                 <label class="block text-lg font-medium">12. ¿Con quién reside el niño? <span
                         class="text-red-500">*</span></label>
-                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar">
+                <select class="border p-2 rounded-md mt-5" name="nucleoFamiliar" id="nucleoFamiliar"
+                    onchange="handlePregunta12(this)">
                     <option value="">Seleccione una opción</option>
                     <option value="padres">Ambos padres</option>
                     <option value="madre">Solo madre</option>
@@ -279,6 +330,9 @@
                     <option value="abuelos">Abuelos</option>
                     <option value="otros">Otros familiares</option>
                 </select>
+
+                <input id="otroNucleoFamiliarInput" type="text" name="otro_nucleo_familiar" placeholder="Especifique"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none question-transition question-hidden">
             </div>
 
             <!--Pregunta 13-->
@@ -330,24 +384,24 @@
             <!--Pregunta 16-->
             <div>
                 <h2 class="block text-lg font-medium">16. ¿Quién cuida al niño?</h2>
-                <div class="flex flex-row gap-x-5 mt-5 items-center">
+                <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="quien_cuida" value="padre">
+                        <input type="radio" name="quien_cuida" value="padre" onchange="handlePregunta16(this)">
                         <span>Padre</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="quien_cuida" value="madre">
+                        <input type="radio" name="quien_cuida" value="madre" onchange="handlePregunta16(this)">
                         <span>Madre</span>
                     </label>
                     <label class="radio">
-                        <input type="radio" name="quien_cuida" value="otro">
+                        <input type="radio" name="quien_cuida" value="otro" onchange="handlePregunta16(this)">
                         <span>Otro</span>
                     </label>
-
-                    <input type="text" name="otroCuidador" placeholder="Especifique" class="border p-2 rounded-md"
-                        hidden>
                 </div>
+
+                <input id="otroCuidadorInput" type="text" name="otroCuidador" placeholder="Especifique"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none question-transition question-hidden">
             </div>
 
             <!--Pregunta 17-->
@@ -397,18 +451,17 @@
 
             <!--Pregunta 20-->
             <div id="pregunta20">
-                <label class="block text-lg font-medium">20. ¿Cuánto tiempo de duración tiene o estuvo en
-                    terapias?
+                <label class="block text-lg font-medium">20. ¿Tiene el niño hermanos?
                 </label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="duracion_terapias_tiempo" value="si">
+                        <input type="radio" name="tiene_hermanos" value="si">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="duracion_terapias_tiempo" value="no">
+                        <input type="radio" name="tiene_hermanos" value="no">
                         <span>No</span>
                     </label>
                 </div>
@@ -434,23 +487,28 @@
 
             <!--Pregunta 22-->
             <!--Cargar desde ViewBag-->
-            <div>
+            <div id="pregunta22">
                 <label class="block text-lg font-medium">22. ¿Con quién duerme el niño?</label>
-                <select class="border p-2 rounded-md mt-5" name="duermecon" id="duermecon">
+                <select class="border p-2 rounded-md mt-5" name="duermecon" id="duermecon"
+                    onchange="handlePregunta22(this)">
                     <option value="">Seleccione una opción</option>
                     <option value="solo">Solo en su cuarto</option>
                     <option value="padres">Con los padres</option>
                     <option value="hermanos">Con hermanos</option>
                     <option value="otros">Con otros familiares</option>
                 </select>
+
+                <input id="otroDuermeConInput" type="text" name="otro_duerme_con" placeholder="Especifique"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none question-transition question-hidden">
             </div>
 
             <!--Pregunta 23-->
             <!--Cargar desde ViewBag-->
-            <div>
+            <div id="pregunta23">
                 <label class="block text-lg font-medium">23. En el último año ¿Ha habido cambios significativos en
                     la vida del niño?</label>
-                <select class="border p-2 rounded-md mt-5" name="cambiosSignificativos" id="cambiosSignificativos">
+                <select class="border p-2 rounded-md mt-5" name="cambiosSignificativos" id="cambiosSignificativos"
+                    onchange="handlePregunta23(this)">
                     <option value="">Seleccione una opción</option>
                     <option value="ninguno">Ningún cambio</option>
                     <option value="mudanza">Mudanza</option>
@@ -460,56 +518,59 @@
                     <option value="fallecimiento">Fallecimiento familiar</option>
                     <option value="otros">Otros</option>
                 </select>
+
+                <input id="otroCambiosInput" type="text" name="otro_cambios" placeholder="Especifique"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none question-transition question-hidden">
             </div>
         </form>
 
         <form id="form3" class="form-step hidden space-y-10">
-            <h2 class="text-xl font-semibold mb-6">Titulo de sección</h2>
+            <h2 class="text-xl font-semibold mb-6">Interacción en la Escuela</h2>
 
             <!--Pregunta 24-->
-            <div>
+            <div id="pregunta24">
                 <label class="block text-lg font-medium">24. ¿Asiste el niño a la escuela?</label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="asiste_escuela" value="si">
+                        <input type="radio" name="asiste_escuela" value="si" onchange="handlePregunta24(this)">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="asiste_escuela" value="no">
+                        <input type="radio" name="asiste_escuela" value="no" onchange="handlePregunta24(this)">
                         <span>No</span>
                     </label>
                 </div>
             </div>
 
             <!--Pregunta 25-->
-            <div>
-                <label class="block text-lg font-medium mt-5"> 25. ¿Asiste el niño a un centro de cuidado o estancia
+            <div id="pregunta25" class="question-transition question-hidden">
+                <label class="block text-lg font-medium"> 25. ¿Asiste el niño a un centro de cuidado o estancia
                     infantil?
                 </label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="asiste_centro_cuidado" value="si">
+                        <input type="radio" name="asiste_centro_cuidado" value="si" onchange="handlePregunta25(this)">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="asiste_centro_cuidado" value="no">
+                        <input type="radio" name="asiste_centro_cuidado" value="no" onchange="handlePregunta25(this)">
                         <span>No</span>
                     </label>
                 </div>
             </div>
 
             <!--Pregunta 26-->
-            <div>
-                <label class="block text-lg font-medium mt-5">
+            <div id="pregunta26" class="question-transition question-hidden">
+                <label class="block text-lg font-medium">
                     26. ¿A qué edad ingresó a la escuela?
                 </label>
                 <input
-                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
-                    type="number" placeholder="Ingrese edad">
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    type="number" name="edad_ingreso_escuela" placeholder="Ingrese edad">
             </div>
 
             <!--Pregunta 27-->
@@ -518,7 +579,7 @@
                     27. Nombre del centro educativo
                 </label>
                 <input
-                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
                     type="text" placeholder="Ingrese nombre">
             </div>
 
@@ -528,47 +589,56 @@
                     28. Curso actual
                 </label>
                 <input
-                    class="w-full rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none"
                     type="text" placeholder="Ingrese nombre">
             </div>
 
             <!--Pregunta 29-->
-            <div>
+            <div id="pregunta29">
                 <h2 class="block text-lg font-medium mt-5">
                     29. Tipo de centro educativo
                 </h2>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="tipo_centro_educativo" value="publico">
+                        <input type="radio" name="tipo_centro_educativo" value="publico"
+                            onchange="handlePregunta29(this)">
                         <span>Público</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="tipo_centro_educativo" value="privado">
+                        <input type="radio" name="tipo_centro_educativo" value="privado"
+                            onchange="handlePregunta29(this)">
                         <span>Privado</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="tipo_centro_educativo" value="otro">
+                        <input type="radio" name="tipo_centro_educativo" value="otro" onchange="handlePregunta29(this)">
                         <span>Otro</span>
                     </label>
                 </div>
+
+                <input id="otroCentroEducativoInput" type="text" name="otro_centro_educativo" placeholder="Especifique"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none question-transition question-hidden">
             </div>
 
             <!--Pregunta 30-->
-            <div>
+            <div id="pregunta30">
                 <h2 class="block text-lg font-medium mt-5">
                     30. Características del centro
                 </h2>
 
-                <select class="p-2 border rounded-md" name="caracteristicasCentro" id="caracteristicasCentro">
-                    <option value="1" selected>Seleccione una opción</option>
+                <select class="p-2 border rounded-md mt-5" name="caracteristicasCentro" id="caracteristicasCentro"
+                    onchange="handlePregunta30(this)">
+                    <option value="" selected>Seleccione una opción</option>
                     <option value="escuela_regular">Escuela regular</option>
                     <option value="escuela_especial">Escuela especial</option>
                     <option value="aula_recursos">Aula de recursos</option>
                     <option value="otro">Otro</option>
                 </select>
+
+                <input id="otroCaracteristicasInput" type="text" name="otro_caracteristicas" placeholder="Especifique"
+                    class="w-[250px] rounded-md p-2 border mt-5 focus:ring-[#536de5] focus:border-[#536de5] outline-none question-transition question-hidden">
             </div>
 
             <!--Pregunta 31-->
@@ -682,7 +752,7 @@
         </form>
 
         <form id="form4" class="form-step hidden space-y-10">
-            <h2 class="text-xl font-semibold mb-6">Titulo de sección</h2>
+            <h2 class="text-xl font-semibold mb-6">Interacción en la Comunidad</h2>
 
             <!--Pregunta 35-->
             <div>
@@ -793,19 +863,19 @@
             </div>
 
             <!--Pregunta 40-->
-            <div>
+            <div id="pregunta40">
                 <label class="block text-lg font-medium space-y-10">
                     40. ¿Cuenta la familia con red de apoyo?
                 </label>
 
                 <div class="flex flex-row gap-x-5 mt-5">
                     <label class="radio">
-                        <input type="radio" name="cuenta_red_apoyo" value="si">
+                        <input type="radio" name="cuenta_red_apoyo" value="si" onchange="handlePregunta40(this)">
                         <span>Sí</span>
                     </label>
 
                     <label class="radio">
-                        <input type="radio" name="cuenta_red_apoyo" value="no">
+                        <input type="radio" name="cuenta_red_apoyo" value="no" onchange="handlePregunta40(this)">
                         <span>No</span>
                     </label>
                 </div>
@@ -813,8 +883,8 @@
 
 
             <!--Pregunta 41-->
-            <div>
-                <label class="block text-lg font-medium space-y-10">
+            <div id="pregunta41" class="question-transition question-hidden">
+                <label class="block text-lg font-medium">
                     41. ¿Con qué tipo de red de apoyo cuenta la familia?
                 </label>
 
@@ -836,6 +906,11 @@
                 </div>
             </div>
 
+            <!--Comentario adicional-->
+            <textarea name="comentario" id="comentario"
+                class="w-[550px] mt-5 border rounded-md p-2 focus:ring-[#536de5] focus:border-[#536de5] outline-none text-black"
+                rows="2" maxlength="500" placeholder="Comentario"></textarea>
+
         </form>
 
         <!-- Buttons -->
@@ -851,7 +926,7 @@
         </div>
     </div>
     <script>
-        let currentStep = 2;
+        let currentStep = 4;
         const totalSteps = 4;
 
         // FUNCIONES PARA LÓGICA CONDICIONAL
@@ -955,6 +1030,62 @@
             }
         }
 
+        // Función para la pregunta 12: Si "Otros" → mostrar campo de texto
+        function handlePregunta12(select) {
+            const otroNucleoFamiliarInput = document.getElementById('otroNucleoFamiliarInput');
+
+            if (select.value === 'otros') {
+                otroNucleoFamiliarInput.classList.remove('question-hidden');
+                otroNucleoFamiliarInput.classList.add('question-visible', 'fade-in-up');
+            } else {
+                otroNucleoFamiliarInput.classList.remove('question-visible', 'fade-in-up');
+                otroNucleoFamiliarInput.classList.add('question-hidden');
+                otroNucleoFamiliarInput.value = '';
+            }
+        }
+
+        // Función para la pregunta 16: Mostrar campo "Otro" si selecciona "otro"
+        function handlePregunta16(radio) {
+            const otroCuidadorInput = document.getElementById('otroCuidadorInput');
+
+            if (radio.value === 'otro') {
+                otroCuidadorInput.classList.remove('question-hidden');
+                otroCuidadorInput.classList.add('question-visible', 'fade-in-up');
+            } else {
+                otroCuidadorInput.classList.remove('question-visible', 'fade-in-up');
+                otroCuidadorInput.classList.add('question-hidden');
+                otroCuidadorInput.value = '';
+            }
+        }
+
+        // Función para la pregunta 22: Si "Otros" → mostrar campo de texto
+        function handlePregunta22(select) {
+            const otroDuermeConInput = document.getElementById('otroDuermeConInput');
+
+            if (select.value === 'otros') {
+                otroDuermeConInput.classList.remove('question-hidden');
+                otroDuermeConInput.classList.add('question-visible', 'fade-in-up');
+            } else {
+                otroDuermeConInput.classList.remove('question-visible', 'fade-in-up');
+                otroDuermeConInput.classList.add('question-hidden');
+                otroDuermeConInput.value = '';
+            }
+        }
+
+        // Función para la pregunta 23: Si "Otros" → mostrar campo de texto
+        function handlePregunta23(select) {
+            const otroCambiosInput = document.getElementById('otroCambiosInput');
+
+            if (select.value === 'otros') {
+                otroCambiosInput.classList.remove('question-hidden');
+                otroCambiosInput.classList.add('question-visible', 'fade-in-up');
+            } else {
+                otroCambiosInput.classList.remove('question-visible', 'fade-in-up');
+                otroCambiosInput.classList.add('question-hidden');
+                otroCambiosInput.value = '';
+            }
+        }
+
         // Función para la pregunta 18: Si "Sí" → pregunta 19, Si "No" → pregunta 20
         function handlePregunta18(radio) {
             const pregunta19 = document.getElementById('pregunta19');
@@ -970,6 +1101,104 @@
                 setTimeout(() => {
                     const select19 = pregunta19.querySelector('select[name="frecuencia_participacion"]');
                     if (select19) select19.value = '';
+                }, 300);
+            }
+        }
+
+        // Función para la pregunta 24: Si "Sí" → pregunta 25, Si "No" → pregunta 26
+        function handlePregunta24(radio) {
+            const pregunta25 = document.getElementById('pregunta25');
+            const pregunta26 = document.getElementById('pregunta26');
+
+            if (radio.value === 'si') {
+                // Mostrar pregunta 25, ocultar pregunta 26
+                pregunta25.classList.remove('question-hidden');
+                pregunta25.classList.add('question-visible', 'fade-in-up');
+
+                pregunta26.classList.remove('question-visible', 'fade-in-up');
+                pregunta26.classList.add('question-hidden');
+
+                setTimeout(() => {
+                    const input26 = pregunta26.querySelector('input[name="edad_ingreso_escuela"]');
+                    if (input26) input26.value = '';
+                }, 300);
+            } else {
+                // Mostrar pregunta 26, ocultar pregunta 25
+                pregunta26.classList.remove('question-hidden');
+                pregunta26.classList.add('question-visible', 'fade-in-up');
+
+                pregunta25.classList.remove('question-visible', 'fade-in-up');
+                pregunta25.classList.add('question-hidden');
+
+                setTimeout(() => {
+                    const radios25 = pregunta25.querySelectorAll('input[name="asiste_centro_cuidado"]');
+                    radios25.forEach(rb => rb.checked = false);
+                }, 300);
+            }
+        }
+
+        // Función para la pregunta 25: Si "Sí" → pregunta 26, Si "No" → habilitar continuar
+        function handlePregunta25(radio) {
+            const pregunta26 = document.getElementById('pregunta26');
+
+            if (radio.value === 'si') {
+                pregunta26.classList.remove('question-hidden');
+                pregunta26.classList.add('question-visible', 'fade-in-up');
+            } else {
+                pregunta26.classList.remove('question-visible', 'fade-in-up');
+                pregunta26.classList.add('question-hidden');
+
+                // Limpiar el campo de la pregunta 26 si se oculta
+                setTimeout(() => {
+                    const input26 = pregunta26.querySelector('input[name="edad_ingreso_escuela"]');
+                    if (input26) input26.value = '';
+                }, 300);
+            }
+        }
+
+        // Función para la pregunta 29: Si "Otro" → mostrar campo de texto
+        function handlePregunta29(radio) {
+            const otroCentroEducativoInput = document.getElementById('otroCentroEducativoInput');
+
+            if (radio.value === 'otro') {
+                otroCentroEducativoInput.classList.remove('question-hidden');
+                otroCentroEducativoInput.classList.add('question-visible', 'fade-in-up');
+            } else {
+                otroCentroEducativoInput.classList.remove('question-visible', 'fade-in-up');
+                otroCentroEducativoInput.classList.add('question-hidden');
+                otroCentroEducativoInput.value = '';
+            }
+        }
+
+        // Función para la pregunta 30: Si "Otro" → mostrar campo de texto
+        function handlePregunta30(select) {
+            const otroCaracteristicasInput = document.getElementById('otroCaracteristicasInput');
+
+            if (select.value === 'otro') {
+                otroCaracteristicasInput.classList.remove('question-hidden');
+                otroCaracteristicasInput.classList.add('question-visible', 'fade-in-up');
+            } else {
+                otroCaracteristicasInput.classList.remove('question-visible', 'fade-in-up');
+                otroCaracteristicasInput.classList.add('question-hidden');
+                otroCaracteristicasInput.value = '';
+            }
+        }
+
+        // Función para la pregunta 40: Si "Sí" → pregunta 41, Si "No" → habilitar guardar
+        function handlePregunta40(radio) {
+            const pregunta41 = document.getElementById('pregunta41');
+
+            if (radio.value === 'si') {
+                pregunta41.classList.remove('question-hidden');
+                pregunta41.classList.add('question-visible', 'fade-in-up');
+            } else {
+                pregunta41.classList.remove('question-visible', 'fade-in-up');
+                pregunta41.classList.add('question-hidden');
+
+                // Limpiar el campo de la pregunta 41 si se oculta
+                setTimeout(() => {
+                    const radios41 = pregunta41.querySelectorAll('input[name="tipo_red_apoyo"]');
+                    radios41.forEach(rb => rb.checked = false);
                 }, 300);
             }
         }
@@ -1052,7 +1281,7 @@
                 // 4. VALIDAR CHECKBOXES
                 const checkboxes = block.querySelectorAll('input[type="checkbox"]');
                 if (checkboxes.length > 0) {
-                    const isChecked = Array.from(checkboxes).some(callback => callback.checked);
+                    const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
                     if (!isChecked) {
                         blockIsValid = false;
                         errorMessage = 'Debe seleccionar al menos una opción';
@@ -1076,17 +1305,30 @@
 
         // ACTUALIZAR LA VISUALIZACIÓN DE LOS PASOS
         const updateSteps = () => {
-            // Mostrar/ocultar formularios según el paso actual
+            // Mostrar/ocultar formularios según el paso actual con animación
             document.querySelectorAll('.form-step').forEach((form, index) => {
-                form.classList.toggle('hidden', index + 1 !== currentStep);
+                if (index + 1 === currentStep) {
+                    form.classList.remove('hidden');
+                    // Agregar animación de entrada
+                    setTimeout(() => {
+                        form.classList.add('slide-in');
+                    }, 10);
+                } else {
+                    form.classList.add('hidden');
+                    form.classList.remove('slide-in');
+                }
             });
 
-            // Actualizar el color del indicador de pasos
+            // Actualizar el estilo de las pestañas
             document.querySelectorAll('.step').forEach((el, index) => {
                 if (index + 1 === currentStep) {
-                    el.classList.add('bg-[#536de5]', 'text-white');
+                    // Pestaña activa
+                    el.classList.remove('bg-gray-100', 'text-gray-600', 'border-transparent');
+                    el.classList.add('bg-white', 'text-[#536de5]', 'border-[#536de5]', 'font-semibold', 'active');
                 } else {
-                    el.classList.remove('bg-[#536de5]', 'text-white');
+                    // Pestañas inactivas
+                    el.classList.remove('bg-white', 'text-[#536de5]', 'border-[#536de5]', 'font-semibold', 'active');
+                    el.classList.add('bg-gray-100', 'text-gray-600', 'border-transparent');
                 }
             });
 
@@ -1098,6 +1340,9 @@
 
             // Limpiar errores al cambiar de paso
             clearValidationErrors();
+
+            // Scroll suave al inicio del formulario
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
         // BOTÓN SIGUIENTE CON VALIDACIÓN VISUAL
